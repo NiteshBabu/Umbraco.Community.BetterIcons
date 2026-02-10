@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./better-icons.png" alt="BetterIcons" width="128" height="128">
+<img src="https://raw.githubusercontent.com/NiteshBabu/Umbraco.Community.BetterIcons/master/better-icons.png" alt="BetterIcons" width="128" height="128">
 
 # **BetterIcons for Umbraco**
 
@@ -9,7 +9,7 @@
 [![Umbraco Marketplace](https://img.shields.io/badge/umbraco-marketplace-blue.svg)](https://marketplace.umbraco.com/)
 
 
-![BetterIcons UI](./better-icons.gif)
+![BetterIcons UI](https://raw.githubusercontent.com/NiteshBabu/Umbraco.Community.BetterIcons/master/better-icons.gif)
 
 **A modern, powerful property editor for Umbraco CMS that provides access to 200,000+ icons from popular icon libraries. Built with React for a smooth, responsive user experience.**
 
