@@ -1,0 +1,56 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint-ui:
+    name: Lint UI
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      working-directory: ./ui
+      run: npm install
+      
+    - name: Check TypeScript
+      working-directory: ./ui
+      run: npx tsc --noEmit
+      continue-on-error: true
+      
+  analyze-dotnet:
+    name: Analyze .NET Code
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      working-directory: ./core
+      run: dotnet restore
+      
+    - name: Build
+      working-directory: ./core
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Run code analysis
+      working-directory: ./core
+      run: dotnet format --verify-no-changes --verbosity diagnostic
+      continue-on-error: true

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Community Discussions
+    url: https://github.com/niteshbabu/Umbraco.Community.BetterIcons/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 Documentation
+    url: https://github.com/niteshbabu/Umbraco.Community.BetterIcons#readme
+    about: Check the README for usage instructions and troubleshooting
+  - name: 🐛 Security Issues
+    url: https://github.com/niteshbabu/Umbraco.Community.BetterIcons/security/advisories/new
+    about: Report security vulnerabilities privately

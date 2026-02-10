@@ -1,0 +1,80 @@
+name: Publish to NuGet
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+
+    - name: Get version
+      id: get_version
+      run: |
+        if ("${{ github.event_name }}" -eq "release") {
+          $version = "${{ github.event.release.tag_name }}".TrimStart('v')
+        } else {
+          $version = "${{ github.event.inputs.version }}"
+        }
+        echo "VERSION=$version" >> $env:GITHUB_OUTPUT
+        echo "Building version: $version"
+      shell: pwsh
+      
+    - name: Update version in csproj
+      run: |
+        $csprojPath = "core/BetterIcons.csproj"
+        $content = Get-Content $csprojPath -Raw
+        $content = $content -replace '<Version>.*?</Version>', "<Version>${{ steps.get_version.outputs.VERSION }}</Version>"
+        Set-Content $csprojPath $content
+      shell: pwsh
+      
+    - name: Install UI dependencies
+      working-directory: ./ui
+      run: npm install
+      
+    - name: Build UI
+      working-directory: ./ui
+      run: npm run build
+      
+    - name: Restore .NET dependencies
+      working-directory: ./core
+      run: dotnet restore
+      
+    - name: Build .NET package
+      working-directory: ./core
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Pack NuGet package
+      working-directory: ./core
+      run: dotnet pack --configuration Release --no-build --output ../nupkg
+      
+    - name: Publish to NuGet
+      working-directory: ./nupkg
+      run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      
+    - name: Upload package as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-package-${{ steps.get_version.outputs.VERSION }}
+        path: nupkg/*.nupkg

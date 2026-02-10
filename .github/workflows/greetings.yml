@@ -1,0 +1,43 @@
+name: Greetings
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Greet first-time issue creator
+        if: github.event_name == 'issues'
+        uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            👋 Thanks for opening your first issue! We appreciate you taking the time to contribute to BetterIcons.
+            
+            A maintainer will review your issue soon. In the meantime, please make sure you've provided all the requested information.
+            
+            If you haven't already, check out our [Contributing Guide](https://github.com/${{ github.repository }}/blob/main/CONTRIBUTING.md) for more information on how to contribute.
+
+      - name: Greet first-time PR creator
+        if: github.event_name == 'pull_request_target'
+        uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-message: |
+            🎉 Thanks for opening your first pull request! We're excited to review your contribution.
+            
+            A maintainer will review your PR soon. Please make sure:
+            - [ ] Your code follows our coding standards
+            - [ ] You've updated relevant documentation
+            - [ ] All CI checks pass
+            
+            Check out our [Contributing Guide](https://github.com/${{ github.repository }}/blob/main/CONTRIBUTING.md) for more information.
+            
+            Thank you for contributing to BetterIcons! ❤️

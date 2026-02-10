@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install UI dependencies
+      working-directory: ./ui
+      run: npm ci
+      
+    - name: Build UI
+      working-directory: ./ui
+      run: npm run build
+      
+    - name: Restore .NET dependencies
+      working-directory: ./core
+      run: dotnet restore
+      
+    - name: Build .NET package
+      working-directory: ./core
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Pack NuGet package
+      working-directory: ./core
+      run: dotnet pack --configuration Release --no-build --output ../nupkg
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-package
+        path: nupkg/*.nupkg
+        retention-days: 7

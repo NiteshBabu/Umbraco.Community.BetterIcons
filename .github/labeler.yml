@@ -1,0 +1,63 @@
+# Configuration for automatic PR labeling based on changed files
+
+'documentation':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**/*'
+
+'frontend':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'ui/**/*'
+      - '**/*.tsx'
+      - '**/*.ts'
+      - '**/*.jsx'
+      - '**/*.js'
+      - '**/*.css'
+
+'backend':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'core/**/*.cs'
+      - 'core/**/*.csproj'
+
+'build':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/build.ps1'
+      - '**/*.targets'
+      - '**/*.props'
+      - '**/rsbuild.config.*'
+      - '**/vite.config.*'
+      - '**/tsconfig.json'
+
+'ci/cd':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/workflows/**/*'
+      - '.github/actions/**/*'
+
+'dependencies':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/package.json'
+      - '**/package-lock.json'
+      - '**/*.csproj'
+      - '**/packages.lock.json'
+
+'configuration':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.config.*'
+      - '**/*.json'
+      - '!**/package.json'
+      - '!**/package-lock.json'
+
+'tests':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.test.*'
+      - '**/*.spec.*'
+      - '**/test/**/*'
+      - '**/tests/**/*'

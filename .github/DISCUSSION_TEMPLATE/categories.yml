@@ -1,0 +1,17 @@
+# Configuration for GitHub Discussions categories
+
+body:
+  - label: 📢 Announcements
+    description: Official announcements from the maintainers
+    
+  - label: 💬 General
+    description: Chat about anything and everything related to BetterIcons
+    
+  - label: 💡 Ideas
+    description: Share ideas for new features or improvements
+    
+  - label: ❓ Q&A
+    description: Ask the community for help
+    
+  - label: 🎨 Show and Tell
+    description: Show off your implementations of BetterIcons
