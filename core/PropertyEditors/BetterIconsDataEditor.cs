@@ -44,7 +44,7 @@ namespace BetterIcons.PropertyEditors
     /// </summary>
     public class BetterIconsConfigurationEditor : ConfigurationEditor
     {
-        public BetterIconsConfigurationEditor(IIOHelper ioHelper, IConfigurationEditorJsonSerializer serializer) 
+        public BetterIconsConfigurationEditor(IIOHelper ioHelper, IConfigurationEditorJsonSerializer serializer)
             : base()
         {
         }

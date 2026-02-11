@@ -63,14 +63,14 @@ namespace BetterIcons.Models
             if (IsEmpty)
                 return HtmlString.Empty;
 
-            var classes = string.IsNullOrWhiteSpace(cssClass) 
-                ? "iconify" 
+            var classes = string.IsNullOrWhiteSpace(cssClass)
+                ? "iconify"
                 : $"iconify {cssClass}";
 
             var html = $@"<span class=""{classes}"" 
                   data-icon=""{Icon}"" 
                   style=""color: {Color}; font-size: {size}px;""></span>";
-            
+
             return new HtmlString(html);
         }
 
@@ -86,7 +86,7 @@ namespace BetterIcons.Models
             var html = $@"<span class=""iconify"" 
                   data-icon=""{Icon}"" 
                   style=""{style}""></span>";
-            
+
             return new HtmlString(html);
         }
 

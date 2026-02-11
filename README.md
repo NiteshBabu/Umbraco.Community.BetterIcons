@@ -1,19 +1,16 @@
-<div align="center">
+<img src="./better-icons.png" alt="BetterIcons" width="100" height="100">
 
-<img src="https://raw.githubusercontent.com/NiteshBabu/Umbraco.Community.BetterIcons/master/better-icons.png" alt="BetterIcons" width="128" height="128">
-
-# **BetterIcons for Umbraco**
+## BetterIcons
 
 [![NuGet](https://img.shields.io/nuget/v/Umbraco.Community.BetterIcons.svg)](https://www.nuget.org/packages/Umbraco.Community.BetterIcons/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Umbraco.Community.BetterIcons.svg)](https://www.nuget.org/packages/Umbraco.Community.BetterIcons/)
 [![Umbraco Marketplace](https://img.shields.io/badge/umbraco-marketplace-blue.svg)](https://marketplace.umbraco.com/)
 
 
-![BetterIcons UI](https://raw.githubusercontent.com/NiteshBabu/Umbraco.Community.BetterIcons/master/better-icons.gif)
+![BetterIcons UI](./better-icons.gif)
 
-**A modern, powerful property editor for Umbraco CMS that provides access to 200,000+ icons from popular icon libraries. Built with React for a smooth, responsive user experience.**
+**BetterIcons is a modern, powerful property editor for Umbraco CMS that provides access to 200,000+ icons from popular icon libraries. Built with React for a smooth, responsive user experience.**
 
-</div>
 
 ## ✨ Features
 

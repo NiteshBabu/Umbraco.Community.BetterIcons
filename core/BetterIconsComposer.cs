@@ -13,7 +13,7 @@ namespace BetterIcons
         public void Compose(IUmbracoBuilder builder)
         {
             builder.ManifestFilters().Append<BetterIconsManifestFilter>();
-            
+
             builder.PropertyValueConverters().Append<BetterIconsValueConverter>();
         }
     }

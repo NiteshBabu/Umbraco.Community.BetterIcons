@@ -27,7 +27,6 @@ jobs:
     - name: Check TypeScript
       working-directory: ./ui
       run: npx tsc --noEmit
-      continue-on-error: true
       
   analyze-dotnet:
     name: Analyze .NET Code
@@ -53,4 +52,3 @@ jobs:
     - name: Run code analysis
       working-directory: ./core
       run: dotnet format --verify-no-changes --verbosity diagnostic
-      continue-on-error: true
