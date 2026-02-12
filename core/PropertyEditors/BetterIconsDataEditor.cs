@@ -1,3 +1,4 @@
+using System;
 using Umbraco.Cms.Core.IO;
 using Umbraco.Cms.Core.PropertyEditors;
 using Umbraco.Cms.Core.Services;
@@ -14,8 +15,7 @@ namespace BetterIcons.PropertyEditors
         view: "/App_Plugins/BetterIcons/index.html",
         Group = "Pickers",
         Icon = "icon-picture",
-        ValueType = ValueTypes.Text,
-        ValueEditorIsReusable = true)]
+        ValueType = ValueTypes.Text)]
     public class BetterIconsDataEditor : DataEditor
     {
         private readonly IIOHelper _ioHelper;
@@ -30,7 +30,6 @@ namespace BetterIcons.PropertyEditors
         {
             _ioHelper = ioHelper;
             _configurationEditorJsonSerializer = configurationEditorJsonSerializer;
-            SupportsReadOnly = true;
         }
 
         protected override IConfigurationEditor CreateConfigurationEditor()

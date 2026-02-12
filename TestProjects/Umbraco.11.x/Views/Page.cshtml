@@ -1,0 +1,235 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using BetterIcons.Extensions
+@using BetterIcons.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Page>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = null;
+	var featuredIcon = Model.GetIconValue("icon");
+	var iconList = Model.Value<BlockListModel>("iconList");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@Model.Name - BetterIcons Demo</title>
+	
+	@* Include Iconify script for icon rendering *@
+	@BetterIconsValue.GetScript()
+	
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			padding: 2rem;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.header {
+			background: white;
+			padding: 2rem;
+			border-radius: 12px;
+			box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+			margin-bottom: 2rem;
+		}
+
+		h1 {
+			color: #333;
+			margin-bottom: 0.5rem;
+		}
+
+		.subtitle {
+			color: #666;
+			font-size: 1.1rem;
+		}
+
+		.icon-showcase {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 1.5rem;
+			margin-bottom: 2rem;
+		}
+
+		.icon-card {
+			background: white;
+			padding: 2rem;
+			border-radius: 12px;
+			box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+			text-align: center;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.icon-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+		}
+
+		.icon-display {
+			font-size: 4rem;
+			margin-bottom: 1rem;
+			color: #667eea;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.icon-display .iconify {
+			width: 4rem;
+			height: 4rem;
+		}
+
+		.icon-name {
+			font-size: 0.9rem;
+			color: #666;
+			word-break: break-word;
+		}
+
+		.content-section {
+			background: white;
+			padding: 2rem;
+			border-radius: 12px;
+			box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+			margin-bottom: 2rem;
+		}
+
+		code {
+			background: #f8f9fa;
+			padding: 0.2rem 0.5rem;
+			border-radius: 4px;
+			font-family: 'Courier New', monospace;
+			font-size: 0.9rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>@Model.Name</h1>
+			<p class="subtitle">BetterIcons Template Demo</p>
+		</div>
+
+		@if (!featuredIcon.IsEmpty)
+		{
+			<div class="content-section">
+				<h2>✨ Your Icon</h2>
+				<div class="icon-card" style="max-width: 300px; margin: 1rem auto;">
+					<div class="icon-display">
+						@featuredIcon.Render(size: 64)
+					</div>
+					<div class="icon-name">
+						<strong>Icon:</strong> @featuredIcon.Icon<br />
+						<strong>Color:</strong> @featuredIcon.Color
+					</div>
+				</div>
+			</div>
+		}
+		else
+		{
+			<div class="content-section">
+				<p style="color: #666;">No icon selected for this page. Please select an icon in the Umbraco backoffice to see it rendered here.</p>
+			</div>
+		}
+		
+		@* Icon List from Blocklist *@
+		@if (iconList != null && iconList.Any())
+		{
+			<div class="content-section">
+				<h2>Your Icon List</h2>
+				<p style="margin-bottom: 1.5rem; color: #666;">Icons from the iconList blocklist property:</p>
+				<div class="icon-showcase">
+					@foreach (var block in iconList)
+					{
+						var blockIcon = block.Content.GetIconValue("icon");
+						var blockLabel = block.Content.Value<string>("label");
+						
+						if (!blockIcon.IsEmpty)
+						{
+							<div class="icon-card">
+								<div class="icon-display">
+									@blockIcon.Render(size: 64)
+								</div>
+								<div class="icon-name">
+									@if (!string.IsNullOrWhiteSpace(blockLabel))
+									{
+										<strong>@blockLabel</strong><br />
+									}
+									@blockIcon.Icon
+								</div>
+							</div>
+						}
+					}
+				</div>
+			</div>
+		}
+		
+		<div class="content-section">
+			<h2>Icon Showcase - 200,000+ Icons Available</h2>
+			<p style="margin-bottom: 1.5rem; color: #666;">These are just a few examples from the massive icon library:</p>
+			<div class="icon-showcase">
+				<div class="icon-card">
+					<div class="icon-display">
+						<span class="iconify" data-icon="mdi:home" style="color: #3498db; font-size: 64px;"></span>
+					</div>
+					<div class="icon-name">mdi:home</div>
+				</div>
+				<div class="icon-card">
+					<div class="icon-display">
+						<span class="iconify" data-icon="fa-solid:heart" style="color: #e74c3c; font-size: 64px;"></span>
+					</div>
+					<div class="icon-name">fa-solid:heart</div>
+				</div>
+				<div class="icon-card">
+					<div class="icon-display">
+						<span class="iconify" data-icon="bi:lightning-fill" style="color: #f39c12; font-size: 64px;"></span>
+					</div>
+					<div class="icon-name">bi:lightning-fill</div>
+				</div>
+				<div class="icon-card">
+					<div class="icon-display">
+						<span class="iconify" data-icon="heroicons:sparkles" style="color: #9b59b6; font-size: 64px;"></span>
+					</div>
+					<div class="icon-name">heroicons:sparkles</div>
+				</div>
+				<div class="icon-card">
+					<div class="icon-display">
+						<span class="iconify" data-icon="lucide:rocket" style="color: #e67e22; font-size: 64px;"></span>
+					</div>
+					<div class="icon-name">lucide:rocket</div>
+				</div>
+				<div class="icon-card">
+					<div class="icon-display">
+						<span class="iconify" data-icon="tabler:star-filled" style="color: #f1c40f; font-size: 64px;"></span>
+					</div>
+					<div class="icon-name">tabler:star-filled</div>
+				</div>
+				<div class="icon-card">
+					<div class="icon-display">
+						<span class="iconify" data-icon="ph:cloud-sun-fill" style="color: #16a085; font-size: 64px;"></span>
+					</div>
+					<div class="icon-name">ph:cloud-sun-fill</div>
+				</div>
+				<div class="icon-card">
+					<div class="icon-display">
+						<span class="iconify" data-icon="ri:fire-fill" style="color: #c0392b; font-size: 64px;"></span>
+					</div>
+					<div class="icon-name">ri:fire-fill</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
