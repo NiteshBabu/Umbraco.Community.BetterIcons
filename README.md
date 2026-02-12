@@ -10,7 +10,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/niteshbabu/Umbraco.Community.BetterIcons.svg)](https://github.com/niteshbabu/Umbraco.Community.BetterIcons/issues)
 
 [![Umbraco Marketplace](https://img.shields.io/badge/umbraco-marketplace-blue.svg)](https://marketplace.umbraco.com/)
-[![Umbraco Version](https://img.shields.io/badge/umbraco-12.x%20%7C%2013.x-brightgreen.svg)](https://umbraco.com)
+[![Umbraco Version](https://img.shields.io/badge/umbraco-11.x%20%7C%2012.x%20%7C%2013.x-brightgreen.svg)](https://umbraco.com)
 [![.NET Version](https://img.shields.io/badge/.NET-7.0%20%7C%208.0-512BD4.svg)](https://dotnet.microsoft.com/)
 
 ![BetterIcons UI](./better-icons.gif)
@@ -51,8 +51,12 @@ Install-Package Umbraco.Community.BetterIcons
 
 ## 🎯 Compatibility
 
-- **Umbraco Version:** 13.x
-- **.NET Version:** 8.0
+| Umbraco Version | .NET Version | Package Version |
+|----------------|--------------|------------------|
+| 13.x           | .NET 8.0     | 1.x              |
+| 12.x           | .NET 7.0     | 1.x              |
+| 11.x           | .NET 7.0     | 1.x              |
+
 - **Browser Support:** Modern browsers (Chrome, Firefox, Safari, Edge)
 
 ## 🚀 Quick Start
