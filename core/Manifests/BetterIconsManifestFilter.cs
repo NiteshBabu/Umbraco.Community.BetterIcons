@@ -1,10 +1,11 @@
+#if NET7_0
 using System.Collections.Generic;
 using Umbraco.Cms.Core.Manifest;
 
 namespace BetterIcons.Manifests
 {
     /// <summary>
-    /// Registers BetterIcons JavaScript
+    /// Registers BetterIcons JavaScript for Umbraco 11-13
     /// </summary>
     public class BetterIconsManifestFilter : IManifestFilter
     {
@@ -21,3 +22,4 @@ namespace BetterIcons.Manifests
         }
     }
 }
+#endif

@@ -1,0 +1,30 @@
+{
+	"$schema": "https://json.schemastore.org/umbraco-package.json",
+	"id": "Umbraco.Community.BetterIcons",
+	"name": "BetterIcons",
+	"version": "1.1.0",
+	"allowPublicAccess": true,
+	"extensions": [
+		{
+			"type": "propertyEditorSchema",
+			"alias": "BetterIcons.Editor",
+			"name": "BetterIcons",
+			"meta": {
+				"defaultPropertyEditorUiAlias": "BetterIcons.UI"
+			}
+		},
+		{
+			"type": "propertyEditorUi",
+			"alias": "BetterIcons.UI",
+			"name": "BetterIcons",
+			"element": "/App_Plugins/BetterIcons/static/js/bettericons.U14.js",
+			"elementName": "bettericons-picker",
+			"meta": {
+				"label": "BetterIcons",
+				"propertyEditorSchemaAlias": "BetterIcons.Editor",
+				"icon": "icon-picture",
+				"group": "pickers"
+			}
+		}
+	]
+}

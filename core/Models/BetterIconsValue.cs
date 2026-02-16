@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Html;
 
 namespace BetterIcons.Models
@@ -11,10 +11,10 @@ namespace BetterIcons.Models
     {
         private const string script = "https://code.iconify.design/3/3.1.0/iconify.min.js";
 
-        [JsonProperty("icon")]
+        [JsonPropertyName("icon")]
         public string Icon { get; set; } = string.Empty;
 
-        [JsonProperty("color")]
+        [JsonPropertyName("color")]
         public string Color { get; set; } = "#000000";
 
         [JsonIgnore]
@@ -41,11 +41,12 @@ namespace BetterIcons.Models
 
             try
             {
-                var data = JObject.Parse(json);
+                using var doc = JsonDocument.Parse(json);
+                var root = doc.RootElement;
                 return new BetterIconsValue
                 {
-                    Icon = data["icon"]?.ToString() ?? string.Empty,
-                    Color = data["color"]?.ToString() ?? "#000000"
+                    Icon = root.TryGetProperty("icon", out var iconProp) ? iconProp.GetString() ?? string.Empty : string.Empty,
+                    Color = root.TryGetProperty("color", out var colorProp) ? colorProp.GetString() ?? "#000000" : "#000000"
                 };
             }
             catch

@@ -14,6 +14,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved accessibility features
 - Dark mode support
 
+## [1.1.0] - 2026-02-16
+
+### Added
+- **Multi-version support**: Added compatibility with Umbraco 11.x, 12.x, 15.x, 16.x, and 17.x
+- Support for .NET 7.0, .NET 9.0, and .NET 10.0 frameworks
+- Demo pages for all supported Umbraco versions
+- Consistent port configuration across test projects
+
+### Technical
+- Multi-target framework compilation (net7.0, net8.0, net9.0, net10.0)
+- Conditional package references for different Umbraco versions
+- Updated property editor implementation for Umbraco 16+ (no EditorType parameter)
+
 ## [1.0.0] - 2026-02-10
 
 ### Added
@@ -30,10 +43,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Responsive design with mobile support
 
 ### Technical
-- Built on Umbraco 13.x and .NET 8.0
+- Built for Umbraco 13.x
+- Multi-target framework support: .NET 8.0
+- Umbraco 14.x is not currently supported due to breaking API changes (support in progress)
 - React UI with TypeScript and Rsbuild
 - Virtual scrolling for large icon lists
 - Optimized bundle size and lazy loading
 
-[Unreleased]: https://github.com/niteshbabu/Umbraco.Community.BetterIcons/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/niteshbabu/Umbraco.Community.BetterIcons/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/niteshbabu/Umbraco.Community.BetterIcons/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/niteshbabu/Umbraco.Community.BetterIcons/releases/tag/v1.0.0

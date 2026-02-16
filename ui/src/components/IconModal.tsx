@@ -138,9 +138,16 @@ export const IconModal = ({
     onSearchChange('');
   };
 
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    // Only close if clicking directly on the overlay background
+    if (e.target === e.currentTarget) {
+      onClose(e);
+    }
+  };
+
   return (
-    <ModalOverlay isAnimating={isAnimating} onClick={onClose}>
-      <ModalContent isAnimating={isAnimating} onClick={(e) => e.stopPropagation()}>
+    <ModalOverlay isAnimating={isAnimating} onClick={handleOverlayClick}>
+      <ModalContent isAnimating={isAnimating}>
         <ModalHeader>
           <TitleRow>
             <BrandLogo src="/App_Plugins/BetterIcons/better-icons.png" alt="BetterIcons" />

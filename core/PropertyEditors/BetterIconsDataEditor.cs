@@ -6,8 +6,9 @@ using Umbraco.Cms.Core.Serialization;
 
 namespace BetterIcons.PropertyEditors
 {
+#if NET7_0 || NET8_0
     /// <summary>
-    /// BetterIcons property editor for Umbraco CMS
+    /// BetterIcons property editor for Umbraco CMS 11-13
     /// </summary>
     [DataEditor(
         alias: "BetterIcons.Editor",
@@ -48,4 +49,17 @@ namespace BetterIcons.PropertyEditors
         {
         }
     }
+#else
+    /// <summary>
+    /// BetterIcons property editor for Umbraco CMS 17
+    /// </summary>
+    [DataEditor("BetterIcons.Editor", ValueType = ValueTypes.Text)]
+    public class BetterIconsDataEditor : DataEditor
+    {
+        public BetterIconsDataEditor(IDataValueEditorFactory dataValueEditorFactory)
+            : base(dataValueEditorFactory)
+        {
+        }
+    }
+#endif
 }

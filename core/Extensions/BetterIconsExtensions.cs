@@ -16,7 +16,13 @@ namespace BetterIcons.Extensions
         /// </summary>
         public static BetterIconsValue GetIconValue(this IPublishedElement element, string propertyAlias)
         {
+#if NET7_0 || NET8_0
             var value = element.Value<BetterIconsValue>(propertyAlias);
+#else
+            // Umbraco 14+: Use GetProperty then Value
+            var property = element.GetProperty(propertyAlias);
+            var value = property?.GetValue() as BetterIconsValue;
+#endif
             return value ?? new BetterIconsValue();
         }
 

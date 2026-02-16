@@ -1,12 +1,15 @@
 {
 	"name": "bettericons",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "rsbuild build",
-		"dev": "rsbuild dev --open",
-		"preview": "rsbuild preview"
+		"clean": "node -e \"const fs = require('fs'); const path = require('path'); const dir = path.join(__dirname, '../core/wwwroot/App_Plugins/BetterIcons'); if (fs.existsSync(dir)) { fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true }); }\"",
+		"build": "npm run clean && npm run build:U13 && npm run build:U14",
+		"build:U13": "rsbuild build --config rsbuild.U13.config.ts",
+		"build:U14": "rsbuild build --config rsbuild.U14.config.ts",
+		"dev": "rsbuild dev --open --config rsbuild.U14.config.ts",
+		"preview": "rsbuild preview --config rsbuild.U14.config.ts"
 	},
 	"dependencies": {
 		"@rsbuild/plugin-preact": "^1.7.1",
@@ -20,6 +23,7 @@
 		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
 		"@types/styled-components": "^5.1.36",
+		"@umbraco-cms/backoffice": "^15.2.3",
 		"typescript": "^5.8.3"
 	}
 }

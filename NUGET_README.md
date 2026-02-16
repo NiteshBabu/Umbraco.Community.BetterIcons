@@ -5,9 +5,9 @@
 [![License](https://img.shields.io/github/license/niteshbabu/Umbraco.Community.BetterIcons.svg)](https://github.com/niteshbabu/Umbraco.Community.BetterIcons/blob/main/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/niteshbabu/Umbraco.Community.BetterIcons.svg)](https://github.com/niteshbabu/Umbraco.Community.BetterIcons/issues)
 
-[![Umbraco Marketplace](https://img.shields.io/badge/umbraco-marketplace-blue.svg)](https://marketplace.umbraco.com/)
-[![Umbraco Version](https://img.shields.io/badge/umbraco-11.x%20%7C%2012.x%20%7C%2013.x-brightgreen.svg)](https://umbraco.com)
-[![.NET Version](https://img.shields.io/badge/.NET-7.0%20%7C%208.0-512BD4.svg)](https://dotnet.microsoft.com/)
+[![Umbraco Marketplace](https://img.shields.io/badge/umbraco-marketplace-blue.svg)](https://marketplace.umbraco.com/package/umbraco.community.bettericons)
+[![Umbraco Version](https://img.shields.io/badge/umbraco-11.x%20|%2012.x%20|%2013.x%20|%2015.x%20|%2016.x%20|%2017.x-brightgreen.svg)](https://umbraco.com)
+[![.NET Version](https://img.shields.io/badge/.NET-7.0%20|%208.0%20|%209.0%20|%2010.0-512BD4.svg)](https://dotnet.microsoft.com/)
 
 **BetterIcons is a modern property editor for Umbraco CMS that provides access to 200,000+ icons from popular icon libraries.**
 
@@ -87,9 +87,17 @@ In Umbraco backoffice:
 ## 🎯 Compatibility
 
 | Umbraco Version | .NET Version | Package Version |
-|----------------|--------------|-----------------|
-| 13.x           | .NET 8.0     | 1.x             |
-| 12.x           | .NET 7.0     | 1.x             || 11.x           | .NET 7.0     | 1.x             |
+|----------------|--------------|------------------|
+| 17.x           | .NET 10.0    | ≥ 1.1.0          |
+| 16.x           | .NET 9.0     | ≥ 1.1.0          |
+| 15.x           | .NET 9.0     | ≥ 1.1.0          |
+| 13.x           | .NET 8.0     | ≥ 1.0.0          |
+| 12.x           | .NET 7.0     | ≥ 1.1.0          |
+| 11.x           | .NET 7.0     | ≥ 1.1.0          |
+
+> **Note:** Umbraco 14.x is not currently supported due to breaking API changes. Support for this version is being worked on.
+
+
 ## 💾 Data Storage
 
 Icon values are stored as: `collection:iconName|colorHex`
@@ -122,7 +130,7 @@ Full documentation and examples: [GitHub Repository](https://github.com/niteshba
 
 - **Report Issues:** [GitHub Issues](https://github.com/niteshbabu/Umbraco.Community.BetterIcons/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/niteshbabu/Umbraco.Community.BetterIcons/discussions)
-- **Marketplace:** [Umbraco Marketplace](https://marketplace.umbraco.com/)
+- **Marketplace:** [Umbraco Marketplace](https://marketplace.umbraco.com/package/umbraco.community.bettericons)
 
 ## 📄 License
 
