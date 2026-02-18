@@ -20,6 +20,7 @@ BetterIcons is a modern property editor that provides access to **200,000+ icons
 - 🌈 **Color Picker** - Customize icon colors directly in the editor
 - ⚡ **Fast & Responsive** - Built with React for smooth performance
 - 🔧 **Zero Configuration** - Works out of the box with easy Razor helpers
+- 🛡️ **License Info in Modal** - See license details and warnings for each icon collection directly in the picker modal
 
 ## 📦 Installation
 
@@ -51,14 +52,14 @@ Go to **Settings > Document Types** and add a new property with **BetterIcons** 
 
 ## 🎯 Compatibility
 
-| Umbraco Version | .NET Version |
-|----------------|---------------|
-| 17.x           | .NET 10.0     |
-| 16.x           | .NET 9.0      |
-| 15.x           | .NET 9.0      |
-| 13.x           | .NET 8.0      |
-| 12.x           | .NET 7.0      |
-| 11.x           | .NET 7.0      |
+| Umbraco Version | .NET Version | Package Version |
+|----------------|--------------|------------------|
+| 17.x           | .NET 10.0    | ≥ 1.1.0          |
+| 16.x           | .NET 9.0     | ≥ 1.1.0          |
+| 15.x           | .NET 9.0     | ≥ 1.1.0          |
+| 13.x           | .NET 8.0     | ≥ 1.0.0          |
+| 12.x           | .NET 7.0     | ≥ 1.1.0          |
+| 11.x           | .NET 7.0     | ≥ 1.1.0          |
 
 > **Note:** Umbraco 14.x is not currently supported due to breaking API changes. Support for this version is being worked on.
 
@@ -71,6 +72,9 @@ Full documentation: [GitHub Repository](https://github.com/NiteshBabu/Umbraco.Co
 - [Discussions](https://github.com/NiteshBabu/Umbraco.Community.BetterIcons/discussions)
 - [Report Issues](https://github.com/NiteshBabu/Umbraco.Community.BetterIcons/issues)
 
-## 📄 License
+
+## 📄 License & Compliance
+
+BetterIcons now displays license information for each icon collection directly in the picker modal, helping users make informed and compliant choices. Users are warned about restricted or unknown licenses before selection.
 
 MIT License - Free to use in commercial and personal projects.

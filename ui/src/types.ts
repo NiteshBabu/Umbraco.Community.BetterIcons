@@ -3,6 +3,14 @@ export interface IconValue {
   color?: string;
 }
 
+export interface CollectionLicenseInfo {
+  collection: string;
+  name: string;
+  license: string; 
+  licenseTitle: string;
+  licenseUrl?: string;
+}
+
 export interface IconCollection {
   prefix: string;
   name: string;
@@ -12,6 +20,8 @@ export interface IconCollection {
   };
   license?: {
     title: string;
+    spdx?: string;
+    url?: string;
   };
 }
 

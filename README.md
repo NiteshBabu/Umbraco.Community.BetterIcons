@@ -15,7 +15,9 @@
 
 ![BetterIcons UI](./better-icons.gif)
 
+
 **BetterIcons is a modern, powerful property editor for Umbraco CMS that provides access to 200,000+ icons from popular icon libraries. Built with React for a smooth, responsive user experience.**
+
 
 </div>
 
@@ -30,8 +32,8 @@
 - 📱 **Responsive UI** - Modern, touch-friendly interface
 - 🔍 **Collection Browser** - Browse icons by collection with tab-based navigation
 - ✅ **Visual Selection** - Currently selected icon is highlighted when reopening the picker
-- 🚀 **CDN Delivery** - Icons loaded via Iconify CDN for optimal performance
-- 📦 **No File Management** - Static web assets automatically served from the package
+- 🛡️ **License Info in Modal** - See license details and warnings (with direct links to license) for each icon collection directly in the picker modal
+
 
 ## 📦 Installation
 
@@ -239,7 +241,11 @@ The color picker value is stored with the icon. If colors aren't displaying:
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## 📄 License & Compliance
 
+BetterIcons now displays license information for each icon collection directly in the picker modal, helping users make informed and compliant choices. Users are warned about restricted or unknown licenses before selection.
+
+MIT License - Free to use in commercial and personal projects.
 
 ## 📞 Support
 

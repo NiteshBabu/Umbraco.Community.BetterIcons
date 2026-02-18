@@ -382,7 +382,7 @@ export const Tab = styled.button<{ active: boolean }>`
 `
 
 export const IconGrid = styled.div`
-  padding: 12px 12px 12px 24px;
+  padding: 0 12px 12px 24px;
 `
 
 export const IconGridInner = styled.div`
@@ -598,4 +598,72 @@ export const CollectionGroupHeader = styled.div`
 
 export const CollectionGroup = styled.div`
   margin-bottom: 12px;
+`
+
+export const LicenseContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 12px;
+`
+
+export const LicenseLabel = styled.span`
+  font-weight: 500;
+  color: #333;
+`
+
+export const LicenseBadge = styled.span<{ category: string; allowed: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 11px;
+  background: ${props => {
+    if (!props.allowed) return '#fee';
+    switch (props.category) {
+      case 'permissive': return '#e8f5e9';
+      case 'copyleft': return '#fff3e0';
+      case 'restrictive': return '#ffebee';
+      default: return '#f5f5f5';
+    }
+  }};
+  color: ${props => {
+    if (!props.allowed) return '#c00';
+    switch (props.category) {
+      case 'permissive': return '#2e7d32';
+      case 'copyleft': return '#f57c00';
+      case 'restrictive': return '#c62828';
+      default: return '#666';
+    }
+  }};
+`
+
+export const LicenseLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+export const LicenseWarningMessage = styled.div`
+  margin-top: 4px;
+  padding: 6px 8px;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #856404;
+`
+
+export const LicenseLoadingText = styled.span`
+  color: #999;
+  font-size: 11px;
 `

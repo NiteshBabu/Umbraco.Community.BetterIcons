@@ -9,7 +9,9 @@
 [![Umbraco Version](https://img.shields.io/badge/umbraco-11.x%20|%2012.x%20|%2013.x%20|%2015.x%20|%2016.x%20|%2017.x-brightgreen.svg)](https://umbraco.com)
 [![.NET Version](https://img.shields.io/badge/.NET-7.0%20|%208.0%20|%209.0%20|%2010.0-512BD4.svg)](https://dotnet.microsoft.com/)
 
+
 **BetterIcons is a modern property editor for Umbraco CMS that provides access to 200,000+ icons from popular icon libraries.**
+
 
 ![BetterIcons Demo](https://raw.githubusercontent.com/NiteshBabu/Umbraco.Community.BetterIcons/master/better-icons.gif)
 
@@ -21,6 +23,7 @@
 - ⚡ **Performance Optimized** - Virtualized rendering for smooth scrolling
 - 🔧 **Zero Configuration** - Works out of the box, static assets bundled with DLL
 - 📱 **Responsive UI** - Modern, touch-friendly interface
+- 🛡️ **License Info in Modal** - See license details and warnings (with direct links to license) for each icon collection directly in the picker modal
 
 ## 🚀 Quick Start
 
@@ -132,7 +135,10 @@ Full documentation and examples: [GitHub Repository](https://github.com/niteshba
 - **Discussions:** [GitHub Discussions](https://github.com/niteshbabu/Umbraco.Community.BetterIcons/discussions)
 - **Marketplace:** [Umbraco Marketplace](https://marketplace.umbraco.com/package/umbraco.community.bettericons)
 
-## 📄 License
+
+## 📄 License & Compliance
+
+BetterIcons now displays license information for each icon collection directly in the picker modal, helping users make informed and compliant choices. Users are warned about restricted or unknown licenses before selection.
 
 MIT License - Free for commercial and personal use.
 
