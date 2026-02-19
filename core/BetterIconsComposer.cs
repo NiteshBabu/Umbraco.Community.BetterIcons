@@ -20,7 +20,7 @@ namespace BetterIcons
 #endif
             // Register data editor for all versions
             builder.DataEditors().Add<BetterIconsDataEditor>();
-            
+
             // Register property value converter for all versions
             builder.PropertyValueConverters().Append<BetterIconsValueConverter>();
         }
