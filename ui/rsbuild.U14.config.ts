@@ -12,6 +12,7 @@ export default defineConfig({
   source: {
     entry: {
       'bettericons.U14': './src/index.U14.tsx',
+      'dashboard.U14': './src/dashboard.U14.tsx',
     },
   },
   plugins: [
@@ -33,14 +34,20 @@ export default defineConfig({
           const htmlFile = path.join(OUTPUT_DIR, 'bettericons.U14.html');
           if (fs.existsSync(htmlFile)) {
             fs.unlinkSync(htmlFile);
-            api.logger.info('✓ Removed unnecessary HTML file');
+            api.logger.info('✓ Removed unnecessary bettericons HTML file');
+          }
+          
+          const dashboardHtmlFile = path.join(OUTPUT_DIR, 'dashboard.U14.html');
+          if (fs.existsSync(dashboardHtmlFile)) {
+            fs.unlinkSync(dashboardHtmlFile);
+            api.logger.info('✓ Removed unnecessary dashboard HTML file');
           }
         });
       },
     },
   ],
   html: {
-    template: false, // Don't generate HTML files
+    template: false, 
   },
   output: {
     filename: {

@@ -24,9 +24,7 @@ const GAP_SIZE = 8;
 const ITEMS_PER_ROW = 10;
 const BUFFER_SIZE = 2; 
 
-/**
- * Grid of selectable icons with virtualization
- */
+
 export const IconSelector = ({
   icons,
   iconsWithCollections,
@@ -131,7 +129,7 @@ export const IconSelector = ({
                 return (
                   <IconButton
                     key={`${iconData.collection}-${iconData.icon}-${index}`}
-                    selected={isSelected}
+                    $selected={isSelected}
                     onClick={() => onSelectIcon(iconData.icon, iconData.collection)}
                     type="button"
                     title={fullIconName}

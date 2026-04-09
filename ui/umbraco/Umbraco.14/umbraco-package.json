@@ -25,6 +25,30 @@
 				"icon": "icon-picture",
 				"group": "pickers"
 			}
+		},
+		{
+			"type": "dashboard",
+			"alias": "BetterIcons.Management.Dashboard",
+			"name": "BetterIcons Management",
+			"element": "/App_Plugins/BetterIcons/static/js/dashboard.U14.js",
+			"elementName": "bettericons-management-dashboard",
+			"weight": 0,
+			"meta": {
+				"label": "BetterIcons Management",
+				"pathname": "bettericons-management"
+			},
+			"conditions": [
+				{
+					"alias": "Umb.Condition.SectionAlias",
+					"match": "Umb.Section.Settings"
+				}
+			]
+		},
+		{
+			"type": "icons",
+			"alias": "BetterIcons.RegisteredIcons",
+			"name": "BetterIcons Registered Icons",
+			"js": "/App_Plugins/BetterIcons/registered-icons/index.js"
 		}
 	]
 }
