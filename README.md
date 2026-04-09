@@ -24,6 +24,10 @@
 
 ## ✨ Features
 
+### 🌟 Most Requested Feature
+- **📍 Icon Registration Dashboard** - Now register icons directly into Umbraco's icon picker for use as Document Type icons, Media Type icons, and throughout the backoffice (not just as a property editor!)
+
+### Core Features
 - 🎨 **200,000+ Icons** - Access to Material Design Icons, Font Awesome, Bootstrap Icons, Heroicons, and 100+ more icon sets
 - 🎯 **Smart Search** - Fast search across all collections with real-time results
 - 🌈 **Color Customization** - Built-in color picker for each icon
@@ -154,6 +158,28 @@ Add the the script one time in your layout:
 </body>
 </html>
 ```
+
+
+## 📍 Icon Registration Dashboard (NEW!)
+
+**Most Requested Feature** - 🎉 Now you can register icons to use throughout the Umbraco backoffice!
+
+### Using the Dashboard
+
+1. Navigate to **Settings > BetterIcons Management** in the Umbraco backoffice
+2. Search for any icon from 200,000+ available icons across 100+ collections
+3. Click to select icons you want to register
+4. Click **Register Selected Icons** to add them to Umbraco's icon picker
+5. Use registered icons for Document Types, Media Types, and anywhere in the backoffice!
+
+### Technical Details
+
+**Icon Naming Convention:** Icons are registered with the format `bi-[collection]--[iconname]`
+- Example: `mdi:home` becomes `bi-mdi--home`
+- The `bi-` prefix distinguishes BetterIcons from Umbraco's built-in icons
+
+
+**Note:** After registering icons, you may need to restart your Umbraco application for them to appear in the icon picker.
 
 
 ## 🎨 Icon Collections
