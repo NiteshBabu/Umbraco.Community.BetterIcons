@@ -82,7 +82,7 @@ export const ClearButton = styled.button`
 `
 
 // Modal
-export const ModalOverlay = styled.div<{ isAnimating: boolean }>`
+export const ModalOverlay = styled.div<{ $isAnimating: boolean }>`
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
@@ -90,11 +90,11 @@ export const ModalOverlay = styled.div<{ isAnimating: boolean }>`
   align-items: center;
   justify-content: center;
   z-index: 10000;
-  opacity: ${props => props.isAnimating ? 1 : 0};
+  opacity: ${props => props.$isAnimating ? 1 : 0};
   transition: opacity 0.3s ease;
 `
 
-export const ModalContent = styled.div<{ isAnimating: boolean }>`
+export const ModalContent = styled.div<{ $isAnimating: boolean }>`
   background: white;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -103,8 +103,8 @@ export const ModalContent = styled.div<{ isAnimating: boolean }>`
   max-height: 85vh;
   display: flex;
   flex-direction: column;
-  opacity: ${props => props.isAnimating ? 1 : 0};
-  transform: ${props => props.isAnimating ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)'};
+  opacity: ${props => props.$isAnimating ? 1 : 0};
+  transform: ${props => props.$isAnimating ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)'};
   transition: opacity 0.35s ease, transform 0.35s ease;
 `
 
@@ -358,11 +358,11 @@ export const TabScrollButton = styled.button<{ direction: 'left' | 'right' }>`
   }
 `
 
-export const Tab = styled.button<{ active: boolean }>`
+export const Tab = styled.button<{ $active: boolean }>`
   padding: 10px 16px;
   border: none;
-  background: ${props => props.active ? '#3544b1' : 'transparent'};
-  color: ${props => props.active ? 'white' : '#666'};
+  background: ${props => props.$active ? '#3544b1' : 'transparent'};
+  color: ${props => props.$active ? 'white' : '#666'};
   font-size: 13px;
   font-weight: 500;
   border-radius: 6px 6px 0 0;
@@ -371,7 +371,7 @@ export const Tab = styled.button<{ active: boolean }>`
   transition: all 0.2s ease;
 
   &:hover {
-    background: ${props => props.active ? '#3544b1' : '#f5f5f5'};
+    background: ${props => props.$active ? '#3544b1' : '#f5f5f5'};
   }
 
   span {
@@ -382,7 +382,7 @@ export const Tab = styled.button<{ active: boolean }>`
 `
 
 export const IconGrid = styled.div`
-  padding: 0 12px 12px 24px;
+  padding: 0 24px 12px 24px;
 `
 
 export const IconGridInner = styled.div`
@@ -396,11 +396,11 @@ export const IconGridGrouped = styled.div`
   position: relative;
 `
 
-export const IconButton = styled.button<{ selected?: boolean }>`
+export const IconButton = styled.button<{ $selected?: boolean }>`
   aspect-ratio: 1;
-  border: 2px solid ${props => props.selected ? '#3544b1' : '#e5e5e5'};
+  border: 2px solid ${props => props.$selected ? '#3544b1' : '#e5e5e5'};
   border-radius: 8px;
-  background: ${props => props.selected ? '#f8f9ff' : 'white'};
+  background: ${props => props.$selected ? '#f8f9ff' : 'white'};
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -569,8 +569,8 @@ export const UpdateIndicator = styled.span`
   color: #999;
 `
 
-export const IconGridWrapper = styled.div<{ loading: boolean }>`
-  opacity: ${props => props.loading ? 0.6 : 1};
+export const IconGridWrapper = styled.div<{ $loading: boolean }>`
+  opacity: ${props => props.$loading ? 0.6 : 1};
   transition: opacity 0.2s ease;
 `
 
@@ -615,7 +615,7 @@ export const LicenseLabel = styled.span`
   color: #333;
 `
 
-export const LicenseBadge = styled.span<{ category: string; allowed: boolean }>`
+export const LicenseBadge = styled.span<{ $category: string; $allowed: boolean }>`
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -624,8 +624,8 @@ export const LicenseBadge = styled.span<{ category: string; allowed: boolean }>`
   font-weight: 500;
   font-size: 11px;
   background: ${props => {
-    if (!props.allowed) return '#fee';
-    switch (props.category) {
+    if (!props.$allowed) return '#fee';
+    switch (props.$category) {
       case 'permissive': return '#e8f5e9';
       case 'copyleft': return '#fff3e0';
       case 'restrictive': return '#ffebee';
@@ -633,8 +633,8 @@ export const LicenseBadge = styled.span<{ category: string; allowed: boolean }>`
     }
   }};
   color: ${props => {
-    if (!props.allowed) return '#c00';
-    switch (props.category) {
+    if (!props.$allowed) return '#c00';
+    switch (props.$category) {
       case 'permissive': return '#2e7d32';
       case 'copyleft': return '#f57c00';
       case 'restrictive': return '#c62828';

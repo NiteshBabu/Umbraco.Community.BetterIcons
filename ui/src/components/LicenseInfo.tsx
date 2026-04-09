@@ -1,11 +1,11 @@
 import { useLicenseInfo } from '../hooks/useLicenseInfo';
 import {
-  LicenseBadge,
-  LicenseContainer,
-  LicenseLabel,
-  LicenseLink,
-  LicenseLoadingText,
-  LicenseWarningMessage,
+    LicenseBadge,
+    LicenseContainer,
+    LicenseLabel,
+    LicenseLink,
+    LicenseLoadingText,
+    LicenseWarningMessage,
 } from '../styles';
 import { categorizeLicense, getLicenseIndicator, getLicenseRestrictionReason, isLicenseAllowed } from '../utils';
 
@@ -29,7 +29,7 @@ export const LicenseInfo = ({ collection, compact = false }: LicenseInfoProps) =
     return (
       <LicenseContainer>
         <LicenseLabel>License:</LicenseLabel>
-        <LicenseBadge category="unknown" allowed={true}>
+        <LicenseBadge $category="unknown" $allowed={true}>
           ? Unknown
         </LicenseBadge>
       </LicenseContainer>
@@ -45,7 +45,7 @@ export const LicenseInfo = ({ collection, compact = false }: LicenseInfoProps) =
     <div>
       <LicenseContainer>
         <LicenseLabel>License:</LicenseLabel>
-        <LicenseBadge category={category} allowed={allowed}>
+        <LicenseBadge $category={category} $allowed={allowed}>
           {indicator} {license.license}
         </LicenseBadge>
         {!compact && license.licenseUrl && (

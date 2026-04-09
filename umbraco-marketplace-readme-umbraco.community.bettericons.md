@@ -15,6 +15,10 @@ BetterIcons is a modern property editor that provides access to **200,000+ icons
 
 ## ✨ Key Features
 
+### 🌟 Most Requested Feature
+- **📍 Icon Registration Dashboard** - Now register icons directly into Umbraco's icon picker for use as Document Type icons, Media Type icons, and throughout the backoffice!
+
+### Core Features
 - 🎨 **200,000+ Icons** - Access to all major icon libraries
 - 🎯 **Smart Search** - Find icons instantly across all collections
 - 🌈 **Color Picker** - Customize icon colors directly in the editor
@@ -49,6 +53,18 @@ Go to **Settings > Document Types** and add a new property with **BetterIcons** 
 @* Render with custom size *@
 @Model.RenderIcon("iconPropertyAlias", size: 48)
 ```
+
+## 📍 Icon Registration Dashboard
+
+**Most Requested Feature!** 🎉 Now register custom icons to use throughout the Umbraco backoffice:
+
+1. Navigate to **Settings > BetterIcons Management** in the Umbraco backoffice
+2. Search for any icon from 200,000+ available icons
+3. Click to select icons you want to register
+4. Click **Register Selected Icons** to add them to Umbraco's icon picker
+5. Use registered icons for Document Types, Media Types, and anywhere in the backoffice!
+
+**Icon Naming:** Icons are registered as `bi-[collection]--[iconname]` (e.g., `bi-mdi--home`)
 
 ## 🎯 Compatibility
 
