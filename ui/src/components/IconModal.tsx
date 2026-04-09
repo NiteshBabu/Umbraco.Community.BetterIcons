@@ -61,6 +61,9 @@ interface IconModalProps {
   loadingMore: boolean;
   totalIcons: number;
   isColorPickerActive: { current: boolean };
+  customIconSelector?: React.ReactNode; // Optional custom icon selector for multi-select mode
+  customFooter?: React.ReactNode; // Optional custom footer for multi-select mode
+  hideColorPicker?: boolean; // Hide color picker in multi-select mode
 }
 
 /**
@@ -89,6 +92,9 @@ export const IconModal = ({
   loadingMore,
   totalIcons,
   isColorPickerActive,
+  customIconSelector,
+  customFooter,
+  hideColorPicker = false,
 }: IconModalProps) => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -147,8 +153,8 @@ export const IconModal = ({
   };
 
   return (
-    <ModalOverlay isAnimating={isAnimating} onClick={handleOverlayClick}>
-      <ModalContent isAnimating={isAnimating}>
+    <ModalOverlay $isAnimating={isAnimating} onClick={handleOverlayClick}>
+      <ModalContent $isAnimating={isAnimating}>
         <ModalHeader>
           <TitleRow>
             <BrandLogo src="/App_Plugins/BetterIcons/better-icons.png" alt="BetterIcons" />
@@ -193,7 +199,7 @@ export const IconModal = ({
             <Tab
               key={collection.prefix}
               data-key={collection.prefix}
-              active={selectedCollection === collection.prefix}
+              $active={selectedCollection === collection.prefix}
               onClick={() => handleCollectionChange(collection.prefix)}
               type="button"
             >
@@ -225,16 +231,18 @@ export const IconModal = ({
 
           {icons.length > 0 && (
             <>
-              <IconGridWrapper loading={loading && !isInitialLoad}>
-                <IconSelector
-                  icons={icons}
-                  iconsWithCollections={iconsWithCollections}
-                  collection={selectedCollection}
-                  color={color}
-                  selectedIcon={selectedIcon}
-                  onSelectIcon={onSelectIcon}
-                  showCollectionBadge={searchInAll && iconsWithCollections.length > 0}
-                />
+              <IconGridWrapper $loading={loading && !isInitialLoad}>
+                {customIconSelector || (
+                  <IconSelector
+                    icons={icons}
+                    iconsWithCollections={iconsWithCollections}
+                    collection={selectedCollection}
+                    color={color}
+                    selectedIcon={selectedIcon}
+                    onSelectIcon={onSelectIcon}
+                    showCollectionBadge={searchInAll && iconsWithCollections.length > 0}
+                  />
+                )}
               </IconGridWrapper>
               {hasMore && (
                 <div ref={loadMoreRef} style={{ padding: '20px', textAlign: 'center' }}>
@@ -245,41 +253,45 @@ export const IconModal = ({
           )}
         </ModalBody>
 
-        <ModalFooter>
-          <FooterRow>
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-              <ColorLabel>Color:</ColorLabel>
-              <ColorInput
-                type="color"
-                value={color}
-                onChange={(e) => {
-                  e.stopPropagation();
-                  onColorChange(e.target.value);
-                }}
-                onFocus={() => {
-                  isColorPickerActive.current = true;
-                }}
-                onBlur={() => {
-                  setTimeout(() => {
-                    isColorPickerActive.current = false;
-                  }, 200);
-                }}
-              />
-            </div>
-            {icons.length > 0 && (
-              <IconCountInfo>
-                <span>
-                  Showing {icons.length}{totalIcons > 0 && !searchInAll && !search ? ` of ${totalIcons}` : ''} icons
-                  {searchInAll ? ' from all collections' : ` from ${selectedCollection}`}
-                </span>
-                {loading && <UpdateIndicator>Updating...</UpdateIndicator>}
-              </IconCountInfo>
-            )}
-          </FooterRow>
-          <FooterCopyright>
-            © {new Date().getFullYear()} <strong>BetterIcons</strong> by <a href="https://niteshbabu.tech" target="_blank" rel="noopener noreferrer">NiteshBabu</a>
-          </FooterCopyright>
-        </ModalFooter>
+        {customFooter || (
+          <ModalFooter>
+            <FooterRow>
+              {!hideColorPicker && (
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                  <ColorLabel>Color:</ColorLabel>
+                  <ColorInput
+                    type="color"
+                    value={color}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      onColorChange(e.target.value);
+                    }}
+                    onFocus={() => {
+                      isColorPickerActive.current = true;
+                    }}
+                    onBlur={() => {
+                      setTimeout(() => {
+                        isColorPickerActive.current = false;
+                      }, 200);
+                    }}
+                  />
+                </div>
+              )}
+              {icons.length > 0 && (
+                <IconCountInfo>
+                  <span>
+                    Showing {icons.length}{totalIcons > 0 && !searchInAll && !search ? ` of ${totalIcons}` : ''} icons
+                    {searchInAll ? ' from all collections' : ` from ${selectedCollection}`}
+                  </span>
+                  {loading && <UpdateIndicator>Updating...</UpdateIndicator>}
+                </IconCountInfo>
+              )}
+            </FooterRow>
+            <FooterCopyright>
+              © {new Date().getFullYear()} <strong>BetterIcons</strong> by <a href="https://niteshbabu.tech" target="_blank" rel="noopener noreferrer">NiteshBabu</a>
+            </FooterCopyright>
+          </ModalFooter>
+        )}
       </ModalContent>
     </ModalOverlay>
   );

@@ -1,5 +1,28 @@
 {
 	"javascript": [
-		"/App_Plugins/BetterIcons/static/js/bettericons.U13.js"
+		"/App_Plugins/BetterIcons/static/js/bettericons.U13.js",
+		"/App_Plugins/BetterIcons/static/js/dashboard.U13.js"
+	],
+	"dashboards": [
+		{
+			"alias": "BetterIcons.Management.Dashboard",
+			"title": "BetterIcons Management",
+			"view": "/App_Plugins/BetterIcons/index.html",
+			"sections": [
+				"settings"
+			],
+			"weight": 10,
+			"access": [
+				{
+					"grant": "admin"
+				}
+			],
+			"areas": [
+				{
+					"alias": "betterIconsManagement",
+					"label": "BetterIcons Management"
+				}
+			]
+		}
 	]
 }
