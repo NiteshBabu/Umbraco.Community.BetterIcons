@@ -392,6 +392,7 @@ export const IconGridInner = styled.div`
 export const IconGridGrouped = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   position: relative;
 `
