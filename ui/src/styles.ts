@@ -578,7 +578,6 @@ export const CollectionGroupHeader = styled.div`
   font-size: 14px;
   font-weight: 600;
   color: #3544b1;
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -587,12 +586,6 @@ export const CollectionGroupHeader = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-  
-  span:last-child {
-    font-size: 12px;
-    color: #999;
-    font-weight: 600;
   }
 `
 

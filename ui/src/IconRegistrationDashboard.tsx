@@ -177,8 +177,6 @@ const IconName = styled.div`
 `;
 
 interface BetterIconManagementDashboardProps {
-  // For Umbraco 11-13, we might receive context props
-  // For Umbraco 15+, these will be handled differently
 }
 
 export const BetterIconsManagementDashboard = (props: BetterIconManagementDashboardProps) => {
@@ -188,6 +186,7 @@ export const BetterIconsManagementDashboard = (props: BetterIconManagementDashbo
   const [deleting, setDeleting] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [selectedIcons, setSelectedIcons] = useState<string[]>([]);
+  const [pendingModalSelections, setPendingModalSelections] = useState<string[]>([]);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error' | 'info', message: string } | null>(null);
   const [registeredIcons, setRegisteredIcons] = useState<string[]>([]);
 
@@ -214,6 +213,7 @@ export const BetterIconsManagementDashboard = (props: BetterIconManagementDashbo
   const handleIconsSelected = async (icons: string[]) => {
     setRegistering(true);
     setStatusMessage(null);
+    setPendingModalSelections([]);
 
     try {
       const response = await fetch('/umbraco/backoffice/api/bettericons/register', {
@@ -243,8 +243,6 @@ export const BetterIconsManagementDashboard = (props: BetterIconManagementDashbo
           return Array.from(new Set(combined));
         });
       }
-
-      // Don't auto-reload - user needs to manually restart Umbraco
     } catch (error) {
       setStatusMessage({
         type: 'error',
@@ -419,6 +417,8 @@ export const BetterIconsManagementDashboard = (props: BetterIconManagementDashbo
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onIconsSelected={handleIconsSelected}
+          selectedIcons={pendingModalSelections}
+          setSelectedIcons={setPendingModalSelections}
         />
       )}
     </>

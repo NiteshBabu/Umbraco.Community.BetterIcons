@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FooterCopyright, FooterRow, IconCountInfo, ModalFooter, UpdateIndicator } from '../styles';
 import { POPULAR_COLLECTIONS } from '../types';
-import { searchAllCollections, searchIcons } from '../utils';
+import { searchAllCollections, searchIcons, useDebounce } from '../utils';
 import { IconModal } from './IconModal';
 import { MultiSelectIconSelector } from './MultiSelectIconSelector';
 
@@ -17,6 +17,8 @@ interface MultiSelectModalProps {
   isOpen: boolean;
   onClose: () => void;
   onIconsSelected: (icons: string[]) => void;
+  selectedIcons: string[];
+  setSelectedIcons: (icons: string[]) => void;
 }
 
 const ActionButtons = styled.div`
@@ -55,10 +57,11 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
 /**
  * Modal for selecting multiple icons for registration
  */
-export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSelectModalProps) => {
+export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected, selectedIcons, setSelectedIcons }: MultiSelectModalProps) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [search, setSearch] = useState('');
   const [searchInAll, setSearchInAll] = useState(false);
+  const debouncedSearch = useDebounce(search, 300);
   const [selectedCollection, setSelectedCollection] = useState<string>(POPULAR_COLLECTIONS[0].prefix);
   const [icons, setIcons] = useState<string[]>([]);
   const [iconsWithCollections, setIconsWithCollections] = useState<IconWithCollection[]>([]);
@@ -67,14 +70,12 @@ export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSele
   const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [totalIcons, setTotalIcons] = useState<number>(0);
-  const [selectedIcons, setSelectedIcons] = useState<string[]>([]);
 
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => setIsAnimating(true), 10);
     } else {
       setIsAnimating(false);
-      setSelectedIcons([]);
     }
   }, [isOpen]);
 
@@ -90,6 +91,12 @@ export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSele
 
   const handleConfirm = () => {
     onIconsSelected(selectedIcons);
+    setIsAnimating(false);
+    setTimeout(onClose, MODAL_ANIMATION_DURATION_MS);
+  };
+
+  const handleCancel = () => {
+    setSelectedIcons([]); 
     setIsAnimating(false);
     setTimeout(onClose, MODAL_ANIMATION_DURATION_MS);
   };
@@ -111,14 +118,14 @@ export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSele
       setTotalIcons(0);
       
       try {
-        if (searchInAll && search) {
+        if (searchInAll && debouncedSearch) {
           const allCollections = POPULAR_COLLECTIONS.map(c => c.prefix);
-          const results = await searchAllCollections(search, allCollections, 200, 0);
+          const results = await searchAllCollections(debouncedSearch, allCollections, 200, 0);
           setIconsWithCollections(results);
           setIcons(results.map(r => r.icon));
           setHasMore(results.length === 200);
         } else {
-          const result = await searchIcons(selectedCollection, search, 200, 0);
+          const result = await searchIcons(selectedCollection, debouncedSearch, 200, 0);
           setIcons(result.icons);
           setTotalIcons(result.total);
           setIconsWithCollections([]);
@@ -132,7 +139,7 @@ export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSele
     };
 
     loadIcons();
-  }, [selectedCollection, search, isOpen, searchInAll]);
+  }, [selectedCollection, debouncedSearch, isOpen, searchInAll]);
 
   const handleLoadMore = useCallback(async () => {
     if (loadingMore || !hasMore || loading) return;
@@ -141,14 +148,14 @@ export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSele
     try {
       const offset = icons.length;
       
-      if (searchInAll && search) {
+      if (searchInAll && debouncedSearch) {
         const allCollections = POPULAR_COLLECTIONS.map(c => c.prefix);
-        const results = await searchAllCollections(search, allCollections, 200, offset);
+        const results = await searchAllCollections(debouncedSearch, allCollections, 200, offset);
         setIconsWithCollections(prev => [...prev, ...results]);
         setIcons(prev => [...prev, ...results.map(r => r.icon)]);
         setHasMore(results.length === 200);
       } else {
-        const result = await searchIcons(selectedCollection, search, 200, offset);
+        const result = await searchIcons(selectedCollection, debouncedSearch, 200, offset);
         setIcons(prev => [...prev, ...result.icons]);
         setHasMore(result.icons.length === 200);
       }
@@ -157,7 +164,7 @@ export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSele
     } finally {
       setLoadingMore(false);
     }
-  }, [icons, loadingMore, hasMore, selectedCollection, search, searchInAll, loading]);
+  }, [icons, loadingMore, hasMore, selectedCollection, debouncedSearch, searchInAll, loading]);
 
   return (
     <>
@@ -205,9 +212,6 @@ export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSele
             <ModalFooter>
               <FooterRow>
                 <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                  <span style={{ fontSize: '14px', color: '#666', fontWeight: 500 }}>
-                    {selectedIcons.length} icon(s) selected
-                  </span>
                   {icons.length > 0 && (
                     <IconCountInfo>
                       <span>
@@ -219,7 +223,7 @@ export const MultiSelectModal = ({ isOpen, onClose, onIconsSelected }: MultiSele
                   )}
                 </div>
                 <ActionButtons>
-                  <Button $variant="secondary" onClick={handleClose}>
+                  <Button $variant="secondary" onClick={handleCancel}>
                     Cancel
                   </Button>
                   <Button 

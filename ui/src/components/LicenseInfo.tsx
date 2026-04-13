@@ -1,11 +1,11 @@
 import { useLicenseInfo } from '../hooks/useLicenseInfo';
 import {
-    LicenseBadge,
-    LicenseContainer,
-    LicenseLabel,
-    LicenseLink,
-    LicenseLoadingText,
-    LicenseWarningMessage,
+  LicenseBadge,
+  LicenseContainer,
+  LicenseLabel,
+  LicenseLink,
+  LicenseLoadingText,
+  LicenseWarningMessage,
 } from '../styles';
 import { categorizeLicense, getLicenseIndicator, getLicenseRestrictionReason, isLicenseAllowed } from '../utils';
 
