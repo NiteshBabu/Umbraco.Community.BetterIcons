@@ -10,7 +10,46 @@
 			"alias": "BetterIcons.Editor",
 			"name": "BetterIcons",
 			"meta": {
-				"defaultPropertyEditorUiAlias": "BetterIcons.UI"
+				"defaultPropertyEditorUiAlias": "BetterIcons.UI",
+				"settings": {
+					"properties": [
+						{
+							"alias": "allowedCollections",
+							"label": "Allowed Icon Libraries",
+							"description": "Select which icon libraries should be available in the picker. If none are selected, all libraries will be shown.",
+							"propertyEditorUiAlias": "Umb.PropertyEditorUi.CheckBoxList",
+							"config": [
+								{
+									"alias": "items",
+									"value": [
+										{ "name": "Material Design Icons", "value": "mdi" },
+										{ "name": "Phosphor", "value": "ph" },
+										{ "name": "Tabler Icons", "value": "tabler" },
+										{ "name": "Lucide", "value": "lucide" },
+										{ "name": "Heroicons", "value": "heroicons" },
+										{ "name": "Carbon", "value": "carbon" },
+										{ "name": "Bootstrap Icons", "value": "bi" },
+										{ "name": "Ionicons", "value": "ion" },
+										{ "name": "Remix Icon", "value": "ri" },
+										{ "name": "Font Awesome Solid", "value": "fa6-solid" },
+										{ "name": "Font Awesome Regular", "value": "fa6-regular" },
+										{ "name": "Font Awesome Brands", "value": "fa6-brands" },
+										{ "name": "Simple Icons (Brands)", "value": "simple-icons" },
+										{ "name": "SVG Logos", "value": "logos" },
+										{ "name": "Skill Icons", "value": "skill-icons" },
+										{ "name": "Devicon", "value": "devicon" },
+										{ "name": "VSCode Icons", "value": "vscode-icons" },
+										{ "name": "File Icons", "value": "file-icons" },
+										{ "name": "Emoji One", "value": "emojione" },
+										{ "name": "Noto Emoji", "value": "noto" },
+										{ "name": "Twitter Emoji", "value": "twemoji" },
+										{ "name": "Fluent Emoji", "value": "fluent-emoji" }
+									]
+								}
+							]
+						}
+					]
+				}
 			}
 		},
 		{

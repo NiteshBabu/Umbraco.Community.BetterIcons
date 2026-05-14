@@ -1,32 +1,32 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  BrandLogo,
-  ColorInput,
-  ColorLabel,
-  EmptyState,
-  ErrorState,
-  FooterCopyright,
-  FooterRow,
-  HeaderLink,
-  HeaderLinks,
-  IconCountInfo,
-  IconGridWrapper,
-  LoadingState,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  ModalTitle,
-  SearchInput,
-  SearchRow,
-  Tab,
-  TitleRow,
-  ToggleCheckbox,
-  ToggleLabel,
-  ToggleSlider,
-  ToggleWrapper,
-  UpdateIndicator,
+    BrandLogo,
+    ColorInput,
+    ColorLabel,
+    EmptyState,
+    ErrorState,
+    FooterCopyright,
+    FooterRow,
+    HeaderLink,
+    HeaderLinks,
+    IconCountInfo,
+    IconGridWrapper,
+    LoadingState,
+    ModalBody,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    ModalTitle,
+    SearchInput,
+    SearchRow,
+    Tab,
+    TitleRow,
+    ToggleCheckbox,
+    ToggleLabel,
+    ToggleSlider,
+    ToggleWrapper,
+    UpdateIndicator,
 } from '../styles';
 import { POPULAR_COLLECTIONS } from '../types';
 import { IconSelector } from './IconSelector';
@@ -64,6 +64,7 @@ interface IconModalProps {
   customIconSelector?: React.ReactNode; // Optional custom icon selector for multi-select mode
   customFooter?: React.ReactNode; // Optional custom footer for multi-select mode
   hideColorPicker?: boolean; // Hide color picker in multi-select mode
+  collections?: ReadonlyArray<{ prefix: string; name: string; category: string }>; // Filtered collections to display
 }
 
 /**
@@ -95,6 +96,7 @@ export const IconModal = ({
   customIconSelector,
   customFooter,
   hideColorPicker = false,
+  collections = POPULAR_COLLECTIONS,
 }: IconModalProps) => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -195,7 +197,7 @@ export const IconModal = ({
         </ModalHeader>
 
         <TabsWithScroll activeKey={selectedCollection}>
-          {POPULAR_COLLECTIONS.map((collection) => (
+          {collections.map((collection) => (
             <Tab
               key={collection.prefix}
               data-key={collection.prefix}

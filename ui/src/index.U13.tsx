@@ -24,6 +24,9 @@ declare global {
 interface UmbracoModel {
   value: string;
   readonly?: boolean;
+  config?: {
+    allowedCollections?: string[];
+  };
 }
 
 if (typeof angular !== 'undefined') {
@@ -38,6 +41,50 @@ if (typeof angular !== 'undefined') {
     };
 
     setTimeout(initReact, REACT_INIT_DELAY_MS);
+  }]);
+
+  angular.module('umbraco').controller('BetterIcons.AllowedCollectionsController', ['$scope', function ($scope: any) {
+    $scope.collections = [
+      { prefix: 'mdi', name: 'Material Design Icons' },
+      { prefix: 'ph', name: 'Phosphor' },
+      { prefix: 'tabler', name: 'Tabler Icons' },
+      { prefix: 'lucide', name: 'Lucide' },
+      { prefix: 'heroicons', name: 'Heroicons' },
+      { prefix: 'carbon', name: 'Carbon' },
+      { prefix: 'bi', name: 'Bootstrap Icons' },
+      { prefix: 'ion', name: 'Ionicons' },
+      { prefix: 'ri', name: 'Remix Icon' },
+      { prefix: 'fa6-solid', name: 'Font Awesome Solid' },
+      { prefix: 'fa6-regular', name: 'Font Awesome Regular' },
+      { prefix: 'fa6-brands', name: 'Font Awesome Brands' },
+      { prefix: 'simple-icons', name: 'Simple Icons (Brands)' },
+      { prefix: 'logos', name: 'SVG Logos' },
+      { prefix: 'skill-icons', name: 'Skill Icons' },
+      { prefix: 'devicon', name: 'Devicon' },
+      { prefix: 'vscode-icons', name: 'VSCode Icons' },
+      { prefix: 'file-icons', name: 'File Icons' },
+      { prefix: 'emojione', name: 'Emoji One' },
+      { prefix: 'noto', name: 'Noto Emoji' },
+      { prefix: 'twemoji', name: 'Twitter Emoji' },
+      { prefix: 'fluent-emoji', name: 'Fluent Emoji' },
+    ];
+
+    if (!$scope.model.value || !Array.isArray($scope.model.value)) {
+      $scope.model.value = [];
+    }
+
+    $scope.isSelected = function (prefix: string) {
+      return $scope.model.value.indexOf(prefix) > -1;
+    };
+
+    $scope.toggle = function (prefix: string) {
+      var idx = $scope.model.value.indexOf(prefix);
+      if (idx > -1) {
+        $scope.model.value.splice(idx, 1);
+      } else {
+        $scope.model.value.push(prefix);
+      }
+    };
   }]);
 }
 
@@ -74,12 +121,15 @@ window.initBetterIcons = (element: HTMLElement, model: UmbracoModel) => {
       ? model.value
       : JSON.stringify(model.value);
 
+    const allowedCollections = model.config?.allowedCollections;
+
     root.render(
       <BetterIconsCore
         key={valueAsString}
         value={valueAsString}
         onChange={handleChange}
         readonly={model.readonly}
+        allowedCollections={allowedCollections && allowedCollections.length > 0 ? allowedCollections : undefined}
       />
     );
   };

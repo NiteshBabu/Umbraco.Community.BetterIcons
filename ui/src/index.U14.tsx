@@ -1,4 +1,4 @@
-import type { UmbPropertyEditorUiElement } from '@umbraco-cms/backoffice/property-editor';
+import type { UmbPropertyEditorConfigCollection, UmbPropertyEditorUiElement } from '@umbraco-cms/backoffice/property-editor';
 import { createRoot, type Root } from 'react-dom/client';
 import { StyleSheetManager } from 'styled-components';
 import { BetterIconsCore } from './BetterIconsCore';
@@ -7,6 +7,7 @@ export class BetterIconsElement extends HTMLElement implements UmbPropertyEditor
   private root: Root | null = null;
   private _value: string = '';
   private _readonly: boolean = false;
+  private _allowedCollections: string[] | undefined = undefined;
   private container: HTMLDivElement | null = null;
   private styleTarget: HTMLElement | ShadowRoot | null = null;
 
@@ -105,6 +106,15 @@ export class BetterIconsElement extends HTMLElement implements UmbPropertyEditor
     }
   }
 
+  set config(config: UmbPropertyEditorConfigCollection | undefined) {
+    if (!config) return;
+    const allowedCollections = config.getValueByAlias<string[]>('allowedCollections');
+    this._allowedCollections = allowedCollections && allowedCollections.length > 0 ? allowedCollections : undefined;
+    if (this.isConnected) {
+      this.render();
+    }
+  }
+
   private handleChange = (value: string) => {
     this._value = value;
     
@@ -135,6 +145,7 @@ export class BetterIconsElement extends HTMLElement implements UmbPropertyEditor
           value={this._value}
           onChange={this.handleChange}
           readonly={this._readonly}
+          allowedCollections={this._allowedCollections}
         />
       </StyleSheetManager>
     );

@@ -40,13 +40,20 @@ namespace BetterIcons.PropertyEditors
     }
 
     /// <summary>
-    /// Configuration editor for BetterIcons (currently no configuration options, planned for future use)
+    /// Configuration editor for BetterIcons - allows restricting which icon libraries are available
     /// </summary>
     public class BetterIconsConfigurationEditor : ConfigurationEditor
     {
         public BetterIconsConfigurationEditor(IIOHelper ioHelper, IConfigurationEditorJsonSerializer serializer)
             : base()
         {
+            Fields.Add(new ConfigurationField
+            {
+                Key = "allowedCollections",
+                Name = "Allowed Icon Libraries",
+                Description = "Select which icon libraries should be available in the picker. If none are selected, all libraries will be shown.",
+                View = "/App_Plugins/BetterIcons/views/allowedCollections.html"
+            });
         }
     }
 #else

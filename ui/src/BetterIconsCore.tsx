@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { IconDisplay, IconModal } from './components';
 import {
-  ClearButton,
-  Container,
-  GlobalStyle,
-  Label,
-  PlaceholderIcon,
-  TriggerButton,
+    ClearButton,
+    Container,
+    GlobalStyle,
+    Label,
+    PlaceholderIcon,
+    TriggerButton,
 } from './styles';
 import type { IconValue } from './types';
 import { POPULAR_COLLECTIONS } from './types';
@@ -19,6 +19,7 @@ export interface BetterIconsProps {
   value?: string;
   onChange: (value: string) => void;
   readonly?: boolean;
+  allowedCollections?: string[];
 }
 
 interface IconWithCollection {
@@ -26,12 +27,20 @@ interface IconWithCollection {
   collection: string;
 }
 
-export const BetterIconsCore = ({ value, onChange, readonly }: BetterIconsProps) => {
+export const BetterIconsCore = ({ value, onChange, readonly, allowedCollections }: BetterIconsProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [search, setSearch] = useState('');
   const [searchInAll, setSearchInAll] = useState(false);
-  const [selectedCollection, setSelectedCollection] = useState<string>(POPULAR_COLLECTIONS[0].prefix);
+
+  const collections = useMemo(
+    () => allowedCollections && allowedCollections.length > 0
+      ? POPULAR_COLLECTIONS.filter(c => allowedCollections.includes(c.prefix))
+      : POPULAR_COLLECTIONS,
+    [allowedCollections]
+  );
+
+  const [selectedCollection, setSelectedCollection] = useState<string>(collections[0]?.prefix || POPULAR_COLLECTIONS[0].prefix);
   const [icons, setIcons] = useState<string[]>([]);
   const [iconsWithCollections, setIconsWithCollections] = useState<IconWithCollection[]>([]);
   const [loading, setLoading] = useState(false);
@@ -71,7 +80,7 @@ export const BetterIconsCore = ({ value, onChange, readonly }: BetterIconsProps)
       setTotalIcons(0);
       try {
         if (searchInAll && debouncedSearch) {
-          const allCollections = POPULAR_COLLECTIONS.map(c => c.prefix);
+          const allCollections = collections.map(c => c.prefix);
           const results = await searchAllCollections(debouncedSearch, allCollections, 200, 0);
           setIconsWithCollections(results);
           setIcons(results.map(r => r.icon));
@@ -91,7 +100,7 @@ export const BetterIconsCore = ({ value, onChange, readonly }: BetterIconsProps)
     };
 
     loadIcons();
-  }, [selectedCollection, debouncedSearch, isOpen, searchInAll]);
+  }, [selectedCollection, debouncedSearch, isOpen, searchInAll, collections]);
 
   const handleLoadMore = useCallback(async () => {
     if (loadingMore || !hasMore || loading) return;
@@ -100,7 +109,7 @@ export const BetterIconsCore = ({ value, onChange, readonly }: BetterIconsProps)
     try {
       const newOffset = offset + 200;
       if (searchInAll && debouncedSearch) {
-        const allCollections = POPULAR_COLLECTIONS.map(c => c.prefix);
+        const allCollections = collections.map(c => c.prefix);
         const results = await searchAllCollections(debouncedSearch, allCollections, 200, newOffset);
         if (results.length > 0) {
           setIconsWithCollections(prev => [...prev, ...results]);
@@ -119,7 +128,7 @@ export const BetterIconsCore = ({ value, onChange, readonly }: BetterIconsProps)
     } finally {
       setLoadingMore(false);
     }
-  }, [loadingMore, hasMore, loading, offset, searchInAll, debouncedSearch, selectedCollection]);
+  }, [loadingMore, hasMore, loading, offset, searchInAll, debouncedSearch, selectedCollection, collections]);
 
   const handleToggleModal = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -133,7 +142,7 @@ export const BetterIconsCore = ({ value, onChange, readonly }: BetterIconsProps)
           setSelectedCollection(collection);
         }
       } else {
-        setSelectedCollection(POPULAR_COLLECTIONS[0].prefix);
+        setSelectedCollection(collections[0]?.prefix || POPULAR_COLLECTIONS[0].prefix);
       }
       setSearch('');
       setSearchInAll(false);
@@ -234,6 +243,7 @@ export const BetterIconsCore = ({ value, onChange, readonly }: BetterIconsProps)
           loadingMore={loadingMore}
           totalIcons={totalIcons}
           isColorPickerActive={isColorPickerActive}
+          collections={collections}
         />
       </Container>
     </>
